@@ -71,7 +71,7 @@ module "rosa-hcp" {
   cluster_name           = local.cluster_name
   openshift_version      = var.openshift_version
   # account_role_prefix    = local.cluster_name # the latest account-iam-resources module doesn't work with (known after apply) 
-  account_role_prefix    = rosahcp # the latest account-iam-resources only with determined value
+  account_role_prefix    = "rosahcp" # the latest account-iam-resources only with determined value
   operator_role_prefix   = local.cluster_name
   replicas               = local.worker_node_replicas
   aws_availability_zones = local.region_azs
