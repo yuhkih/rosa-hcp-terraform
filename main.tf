@@ -20,7 +20,7 @@ terraform {
       version = ">= 4.20.0"
     }
     rhcs = {
-      version = ">= 1.6.2"
+      version = ">= 1.6.8"
       source  = "terraform-redhat/rhcs"
     }
   }
@@ -58,6 +58,7 @@ locals {
   cluster_name = coalesce(var.cluster_name, "rosa-${random_string.random_name.result}")
 }
 
+
 # The network validator requires an additional 60 seconds to validate Terraform clusters.
 resource "time_sleep" "wait_60_seconds" {
   count = var.create_vpc ? 1 : 0
@@ -67,10 +68,11 @@ resource "time_sleep" "wait_60_seconds" {
 
 module "rosa-hcp" {
   source                 = "terraform-redhat/rosa-hcp/rhcs"
-  version                = "1.6.2"
+  version                = "1.6.8"
   cluster_name           = local.cluster_name
   openshift_version      = var.openshift_version
-  account_role_prefix    = local.cluster_name
+  # account_role_prefix    = local.cluster_name # if this is null, it will cause an issue
+  account_role_prefix    = "test"  # if this is null, it will cause an issue
   operator_role_prefix   = local.cluster_name
   replicas               = local.worker_node_replicas
   aws_availability_zones = local.region_azs
