@@ -80,6 +80,7 @@ module "rosa-hcp" {
   aws_subnet_ids         = var.create_vpc ? var.private_cluster ? module.vpc[0].private_subnets : concat(module.vpc[0].public_subnets, module.vpc[0].private_subnets) : var.aws_subnet_ids
   create_account_roles   = true
   create_operator_roles  = true
+  machine_cidr =  var.vpc_cidr_block
 
   depends_on = [time_sleep.wait_60_seconds]
 }
