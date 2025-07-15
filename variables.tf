@@ -16,7 +16,7 @@
 variable "openshift_version" {
   type        = string
   # default     = "4.16.3"
-  default     = "4.19.0"
+  default     = "4.19.2"
   description = "Desired version of OpenShift for the cluster, for example '4.14.20'. If version is greater than the currently running version, an upgrade will be scheduled."
 }
 
